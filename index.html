@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100vh;
+			background: linear-gradient(to right, red, yellow);
+		}
+
+		.color-picker {
+			width: 10%;
+			height: 50px;
+			border: none;
+			float: left;
+		}
+
+		.color-picker:first-child {
+			background: red;
+		}
+
+		.color-picker:last-child {
+			background: yellow;
+			margin-left: 10px;
+		}
+
+		.color-code {
+			clear: both;
+			margin: 20px;
+		}
+		.picker{
+			gap:20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="picker">
+		<div class="web-picker">
+		<h1 style="color:white; ">BACKGROUND GENEATOR</h1>
+		<div class="picker">
+		<div>
+			<input type="color" class="color-picker" id="left-color">
+		</div>
+		<div>
+			<input type="color" class="color-picker" id="right-color">
+		</div>
+		<div>
+			<button id="random-button">Random</button>
+		</div>
+	
+		</div> 
+		<div class="color-code" style="color: white;"></div>
+		</div>
+	</div>
+
+	<script>
+		const leftColor = document.getElementById("left-color");
+		const rightColor = document.getElementById("right-color");
+		const randomButton = document.getElementById("random-button");
+		const colorCode = document.querySelector(".color-code");
+
+		randomButton.addEventListener("click", function() {
+			const leftColorValue = leftColor.value;
+			const rightColorValue = rightColor.value;
+			const randomLeftColor = getRandomColor();
+			const randomRightColor = getRandomColor();
+			const background = `linear-gradient(to right, ${leftColorValue}, ${rightColorValue})`;
+
+			document.body.style.background = background;
+			colorCode.textContent = background;
+
+			leftColor.value = randomLeftColor;
+			rightColor.value = randomRightColor;
+		});
+
+		function getRandomColor() {
+			const letters = "0123456789ABCDEF";
+			let color = "#";
+			for (let i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+			}
+			return color;
+		}
+	</script>
+</body>
+</html>
